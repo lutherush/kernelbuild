@@ -1,0 +1,18 @@
+--- arch/powerpc/platforms/pseries/lpar.c
++++ arch/powerpc/platforms/pseries/lpar.c
+@@ -554,6 +554,7 @@
+ 		goto out;
+ 
+ 	(*depth)++;
++	preempt_disable();
+ 	trace_hcall_entry(opcode, args);
+ 	(*depth)--;
+ 
+@@ -576,6 +577,7 @@
+ 
+ 	(*depth)++;
+ 	trace_hcall_exit(opcode, retval, retbuf);
++	preempt_enable();
+ 	(*depth)--;
+ 
+ out:
